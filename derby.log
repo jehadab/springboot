@@ -1,0 +1,16 @@
+----------------------------------------------------------------
+Sun Dec 05 00:18:32 EET 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017d-8787-03d0-000012eeb840 
+on database directory memory:E:\ITE\fifth year\web apps\practical\project\estate\dba92bad-b60c-40ab-ae20-917c2f540874 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Users/Jehad/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_131-b11
+user.dir=E:\ITE\fifth year\web apps\practical\project\estate
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Sun Dec 05 00:18:38 EET 2021:
+Shutting down instance a816c00e-017d-8787-03d0-000012eeb840 on database directory memory:E:\ITE\fifth year\web apps\practical\project\estate\dba92bad-b60c-40ab-ae20-917c2f540874 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
