@@ -3,6 +3,7 @@ package com.estate.initializer;
 import com.estate.assets.models.Parameter;
 import com.estate.assets.models.User;
 import com.estate.assets.dbrepository.ParametersRepository;
+import com.estate.components.parameters.ParameterService;
 import com.estate.components.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,16 +15,14 @@ import javax.annotation.PostConstruct;
  */
 @Configuration
 public class StartupInitilaizer {
-    private final Parameter c = new Parameter("stocks","5");
     @Autowired
     private UserService userService;
     @Autowired
-    private ParametersRepository parametersRepository;
+    private ParameterService parameterService;
     @PostConstruct
     public void init() {
-        if (parametersRepository.count() == 0){
-//            parametersRepository.save(c);
-        }
+        parameterService.initializerChecker();
+
 //        createUsers();
 
     }

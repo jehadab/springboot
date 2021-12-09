@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/head.html :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="fragments/header.html :: header"></header>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Stocks Number</th>
+                    <td>Actions</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="estate : ${estates}">
+                    <form th:action="@{/un_sold_estates(selectedEstate=${estate.id})}" method="post">
+                        <th scope="row" th:text="${estate.id}" th:field="*{id}"></th>
+                        <td th:text="${estate.name}"></td>
+                        <td th:text="${estate.price}"></td>
+                        <td th:text="${estate.stocksNumber}"></td>
+                        <td>
+
+                            <button name="action" class="btn btn-primary table-btn" type="submit" value="sell">Sell</button>
+                            <button name="action" class="btn btn-warning table-btn" type="submit" value="edit">edit</button>
+                            <button name="action" class="btn btn-danger table-btn" type="submit" value="delete">Remove
+                            </button>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+<footer th:replace="fragments/header.html :: footer"></footer>
+</body>
+</html>
