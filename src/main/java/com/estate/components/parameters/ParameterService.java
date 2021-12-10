@@ -1,5 +1,6 @@
 package com.estate.components.parameters;
 
+import com.estate.assets.models.EstateModel;
 import com.estate.assets.models.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,14 @@ public class ParameterService {
         return result;
     }
 
+    public void addParameter(Parameter parameter){
+        parameterRepository.save(parameter);
+    }
 
+    public void updateParameter(Parameter parameter){
+        Parameter old = parameterRepository.findByKey(parameter.getKey());
+        old.setValue(parameter.getValue());
+
+        parameterRepository.save(old);
+    }
 }

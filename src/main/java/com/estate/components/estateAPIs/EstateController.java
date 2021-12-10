@@ -20,11 +20,13 @@ public class EstateController {
     public void addEstate(@RequestBody EstateModel estate){
         estateService.addEstate(estate);
     }
+
     @RequestMapping("estate")
     public List<EstateModel> getEstates(){
 
         return estateService.getEstates();
     }
+
     @GetMapping("/estate/{name}")
     public EstateModel getEstate(@PathVariable String name)
     {
