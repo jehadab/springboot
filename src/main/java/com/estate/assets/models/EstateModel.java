@@ -65,6 +65,10 @@ public class EstateModel {
         this.id = id;
     }
 
+    public Long getVersion() {
+        return version;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
@@ -78,6 +82,9 @@ public class EstateModel {
     private double soldPrice;
     @Column(name = "buyer_name")
     private String buyerName;
+
+    @Version
+    private Long version;
 
     public EstateModel(String name, long price, int stocksNumber , Date sellingDate, long soldPrice, String buyerName ){
         super();
@@ -93,6 +100,11 @@ public class EstateModel {
     public EstateModel (String name , long price ){
         this.name = name;
         this.price = price;
+    }
+    public EstateModel (String name , long price , int stocksNumber){
+        this.name = name;
+        this.price = price;
+        this.stocksNumber = stocksNumber;
     }
     public  EstateModel (){
 

@@ -1,6 +1,7 @@
 package com.estate.assets.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Jehad on 12/2/2021.
@@ -8,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

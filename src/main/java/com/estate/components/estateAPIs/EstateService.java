@@ -4,7 +4,9 @@ import com.estate.assets.models.EstateModel;
 import com.estate.assets.models.Parameter;
 import com.estate.components.parameters.ParameterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -62,9 +64,16 @@ public class EstateService {
         return selectedEstate;
 
     }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void sellState(EstateModel estate){
-        estate.setSellingDate(new Date());
-        estaterepositories.save(estate);
+        try {
+            estate.setSellingDate(new Date());
+            estaterepositories.save(estate);
+        }catch (ObjectOptimisticLockingFailureException e)
+        {
+            System.out.println("Somebody has already sold the state in concurrent transaction. Will try again...");
+        }
     }
     public void deleteEstate(String id){
         estaterepositories.deleteById(Long.parseLong(id));

@@ -27,16 +27,13 @@ public class ParameterController {
         model.addAttribute("parameters" , parameterService.getAllParameters());
         return "/parameter/parameters";
     }
-//    @PostMapping("/parameters/all")
-//    public String editParameter(@ModelAttribute(name ="parameter")Parameter parameter ){
-//        parameterService.updateParameter(parameter);
-//        return "redirect:/parameters/all";
-//    }
+
     @GetMapping("/parameter/add")
     public String addParameter(Model model){
         model.addAttribute("parameter" , new Parameter());
         return "/parameter/add";
     }
+
     @Cacheable("parameters")
     @PostMapping(value = "/parameter/add")
     public String addParameter(@ModelAttribute(name ="parameter")Parameter parameter){
@@ -58,6 +55,5 @@ public class ParameterController {
         parameterService.updateParameter(parameter);
         return "redirect:/parameters/all";
     }
-//    @PostMapping
-//    public void
+
 }
