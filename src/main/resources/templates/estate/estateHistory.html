@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/head.html :: head">
+</head>
+<body>
+<header th:replace="fragments/header.html :: header"></header>
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>user added</th>
+                    <th>added time</th>
+                    <th>user edited</th>
+                    <th>edited time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="estateLog,iter : ${estateLogs}">
+                    <th scope="row" th:text="${iter.index}"></th>
+                    <td th:text="${estateLog.adddedUser}"></td>
+                    <td th:text="${estateLog.addedDate}"></td>
+                    <td th:text="${estateLog.editedUser}"></td>
+                    <td th:text="${estateLog.editedDate}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

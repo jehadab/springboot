@@ -1,7 +1,10 @@
 package com.estate.assets.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Jehad on 12/1/2021.
@@ -86,9 +89,24 @@ public class EstateModel {
     @Version
     private Long version;
 
+    @OneToMany(mappedBy = "estate")
+    private List<EstateLog> estateLogs = new ArrayList<EstateLog>();
+
+    public List<EstateLog> getEstateLogs() {
+        return estateLogs;
+    }
+
+    public void addLog(EstateLog log){
+        estateLogs.add(log);
+        log.setEsatete(this);
+
+    }
+    public void setEstateLogs(List<EstateLog> estateLogs) {
+        this.estateLogs = estateLogs;
+    }
+
     public EstateModel(String name, long price, int stocksNumber , Date sellingDate, long soldPrice, String buyerName ){
         super();
-
         this.name = name;
         this.price = price;
         this.stocksNumber = stocksNumber;
