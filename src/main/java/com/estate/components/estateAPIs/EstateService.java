@@ -75,6 +75,7 @@ public class EstateService {
             System.out.println("Somebody has already sold the state in concurrent transaction. Will try again...");
         }
     }
+
     public void deleteEstate(String id){
         estaterepositories.deleteById(Long.parseLong(id));
     }

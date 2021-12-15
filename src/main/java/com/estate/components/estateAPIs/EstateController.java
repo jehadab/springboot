@@ -3,6 +3,7 @@ package com.estate.components.estateAPIs;
 import com.estate.assets.models.EstateModel;
 import com.estate.components.parameters.ParameterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ import java.util.List;
  */
 @Controller
 public class EstateController {
+
+    @Value("${server.port}")
+    private int serverPort;
 
     @Autowired
     private EstateService estateService;
@@ -74,6 +78,12 @@ public class EstateController {
     public String sellEstate(@ModelAttribute(name = "estate")EstateModel estate){
         estateService.sellState(estate);
         return "redirect:/un_sold_estates";
+    }
+
+    @GetMapping(value = "test-nginx")
+    public void testNginx()
+    {
+        System.out.println(serverPort);
     }
 
 //    @GetMapping(value = "/estate/edit_estate" )

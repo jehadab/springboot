@@ -1,6 +1,7 @@
 package com.estate.assets.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Jehad on 12/2/2021.
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "parameter")
-public class Parameter {
+public class Parameter implements Serializable {
 
     @Id
     @Column(name = "p_id")
