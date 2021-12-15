@@ -1,5 +1,6 @@
 package com.estate.components.estateAPIs;
 
+import com.estate.assets.models.EstateLog;
 import com.estate.assets.models.EstateModel;
 import com.estate.components.parameters.ParameterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,13 @@ public class EstateController {
         model.addAttribute("estate" , selectedEstate );
         return "/estate/editEstate";
     }
+    @PostMapping(value = "/un_sold_estates", params = "action=history")
+    public String historyEstate(@RequestParam(name = "selectedEstate")String id , Model model){
+        List<EstateLog> estateLogList = estateService.getAllEstateLogs(id);
+        model.addAttribute("estateLogs" , estateLogList );
+        return "/estate/estateHistory";
+    }
+
     @PostMapping(value = "/estate/edit")
     public String saveEditedEstate(@ModelAttribute(name = "estate")EstateModel estate ){
 //        System.out.println(estate.getId() + estate.getName() + estate.getPrice());
@@ -75,6 +83,7 @@ public class EstateController {
         estateService.sellState(estate);
         return "redirect:/un_sold_estates";
     }
+
 
 //    @GetMapping(value = "/estate/edit_estate" )
 //    public String editEstate(@RequestParam(name = "selectedEstate") String id , Model model , HttpServletRequest request){
