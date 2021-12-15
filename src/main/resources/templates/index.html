@@ -7,7 +7,8 @@
 <body>
 <header th:replace="fragments/header.html :: header"></header>
 <p>index is life</p>
+<a class="btn btn-primary" th:href="@{/rabbitmq/send?content=test&address=testAddress&date=10/11/2001}"> send massage to Application B</a>
 <p th:text="${serverPort}"></p>
-<footer th:replace="fragments\header.html :: footer"></footer>
+<footer th:replace="fragments/header.html :: footer"></footer>
 </body>
 </html>

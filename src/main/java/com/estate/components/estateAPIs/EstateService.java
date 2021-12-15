@@ -123,10 +123,7 @@ public class EstateService {
         return estate;
     }
 
-    public void deleteEstate(String id){
-
     @AopLogger
-    @Transactional
     public String deleteEstate(String id){
 
 
