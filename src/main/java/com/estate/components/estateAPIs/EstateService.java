@@ -19,13 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Jehad on 12/2/2021.
  */
 @Service
 @Transactional
-@AopLogger
 public class EstateService {
 
     @Autowired
@@ -46,7 +46,7 @@ public class EstateService {
 
 
     @AopLogger
-    public void addEstate(EstateModel estate){
+    public EstateModel addEstate(EstateModel estate){
 
 
         estaterepositories.save(estate);
@@ -55,8 +55,9 @@ public class EstateService {
         String traceId= tracer.currentSpan().context().traceIdString();
         estateLogRepository.save(new EstateLog(traceId , userName , new Date() , estate ));
 
-        LOGGER.info("for estate name {} price {} stocks {}" ,
-                estate.getName(), estate.getPrice(), estate.getStocksNumber());
+//        LOGGER.info("for estate name {} price {} stocks {}" ,
+//                estate.getName(), estate.getPrice(), estate.getStocksNumber());
+        return estate;
     }
     public List<EstateModel> getEstates(){
         List <EstateModel> list = new ArrayList<EstateModel>();
@@ -79,9 +80,9 @@ public class EstateService {
 //        });
         return unsoldList ;
     }
-    @AopLogger
 
-    public void updateState(Long id , String name , Long price){
+    @AopLogger
+    public EstateModel updateState(Long id , String name , Long price){
 
         EstateModel estate = estaterepositories.findById(id);
         estate.setName(name);
@@ -93,9 +94,9 @@ public class EstateService {
         EstateLog estateLog = new EstateLog();
         estateLog.updateEstateLog(traceId , userName , new Date() , estate );
         estateLogRepository.save(estateLog);
+        return estate;
 
-        LOGGER.info("a update action on state with id {} : \n estate value : {} "
-                ,estate.getId() , estate.getPrice() );
+
     }
     public EstateModel initSelling(String id){
         EstateModel selectedEstate= getEstateById(id);
@@ -107,25 +108,32 @@ public class EstateService {
 
     @AopLogger
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void sellState(EstateModel estate){
+    public EstateModel sellState(EstateModel estate){
         try {
             estate.setSellingDate(new Date());
             estaterepositories.save(estate);
 
-            LOGGER.info(" a sell action on state with id {} : \n estate value : {} \n estate sold price : {}",
-                    estate.getId() , estate.getPrice() , estate.getSoldPrice());
+//            LOGGER.info(" a sell action on state with id {} : \n estate value : {} \n estate sold price : {}",
+//                    estate.getId() , estate.getPrice() , estate.getSoldPrice());
 
         }catch (ObjectOptimisticLockingFailureException e)
         {
             System.out.println("Somebody has already sold the state in concurrent transaction. Will try again...");
         }
+        return estate;
     }
 
     @AopLogger
-    public void deleteEstate(String id){
+    @Transactional
+    public String deleteEstate(String id){
 
+
+        estateLogRepository.deleteAllByEstate(estaterepositories.findById(Long.parseLong(id)));
         estaterepositories.deleteById(Long.parseLong(id));
-        LOGGER.info("a delete id {} : ",id );
+
+//        LOGGER.info("a delete id {} : ",id );
+
+        return id;
     }
     public int getStocksNumber(){
 

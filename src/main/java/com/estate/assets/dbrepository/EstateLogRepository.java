@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface EstateLogRepository extends CrudRepository<EstateLog , String> {
     public List<EstateLog> findByEstate(EstateModel estate);
+    public void deleteAllByEstate(EstateModel estate);
 }

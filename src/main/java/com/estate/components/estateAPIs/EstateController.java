@@ -65,6 +65,7 @@ public class EstateController {
         return "/estate/estateHistory";
     }
 
+
     @PostMapping(value = "/estate/edit")
     public String saveEditedEstate(@ModelAttribute(name = "estate")EstateModel estate ){
 //        System.out.println(estate.getId() + estate.getName() + estate.getPrice());
